@@ -1,0 +1,12 @@
+{% extends "modelo.html" %}
+{% block conteudo %}
+<div class="card" style="width: 18rem;">
+  <img src="{{ url_for('static', filename='kirby.jpg') }}" class="card-img-top" alt="kirby">
+  <div class="card-body">
+    <h5 class="card-title">Samantha</h5>
+    <p class="card-text">Aluna de sistemas para internet.</p>
+    <a href="#" class="btn btn-primary">LinkedIn</a>
+    <a href="#" class="btn btn-primary">GitHub</a>
+  </div>
+</div>
+{% endblock %}
