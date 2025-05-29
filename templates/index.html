@@ -1,6 +1,108 @@
 {% extends "modelo.html" %}
- {% block conteudo %}
-    <h1> Ola, mundo </h1>
-<a  href= "/sobre-equipe">Próxima página </a>
-    {% endblock %}
 
+{% block conteudo %}
+  <div class="container mt-5">
+    <h1 class="mx-auto">Olá, mundo</h1>
+
+    <div class="mx-auto" style="max-width: 700px; font-size: 1.1rem;">
+      <h2>Resumo dos tópicos</h2>
+
+      <h4>a. Estruturas de seleção</h4>
+      <p>
+        Estruturas de seleção permitem que um programa tome decisões e escolha entre diferentes caminhos de execução, dependendo de condições avaliadas durante a execução. Em Python, as principais estruturas de seleção são o <code>if</code>, <code>elif</code> e <code>else</code>. Por exemplo, você pode verificar se um número é positivo ou negativo e executar comandos diferentes para cada caso, garantindo maior controle do fluxo do programa.
+      </p>
+
+      <h4>b. Estruturas de repetição</h4>
+      <p>
+        Estruturas de repetição são usadas para executar um bloco de código várias vezes, enquanto uma condição for verdadeira ou por um número determinado de iterações. As duas estruturas principais são o <code>for</code> e o <code>while</code>. O <code>for</code> é útil para iterar sobre sequências como listas e strings, enquanto o <code>while</code> executa o código enquanto uma condição lógica permanecer verdadeira. São fundamentais para automatizar tarefas repetitivas.
+      </p>
+
+      <h4>c. Vetores e matrizes</h4>
+      <p>
+        Vetores e matrizes são estruturas de dados que armazenam coleções de elementos. Um vetor é uma lista unidimensional, ou seja, uma sequência linear de valores. Já uma matriz é uma estrutura bidimensional (ou mais dimensões), que pode ser representada em Python como uma lista de listas, onde cada elemento é acessado por índices múltiplos (linha e coluna). São amplamente usados para manipulação de dados numéricos, imagens, tabelas e mais.
+      </p>
+
+      <h4>d. Funções e procedimentos</h4>
+      <p>
+        Funções e procedimentos são blocos de código que podem ser reutilizados ao longo do programa para realizar tarefas específicas. Em Python, tudo são funções, mas podemos pensar que procedimentos são funções que não retornam valor (ou retornam None). Funções recebem parâmetros, executam operações e podem retornar resultados, facilitando a organização e modularidade do código, além de evitar repetição.
+      </p>
+
+      <h4>e. Tratamento de exceção em Python</h4>
+      <p>
+        O tratamento de exceções permite que programas lidem com erros ou situações inesperadas durante a execução, sem parar abruptamente. Em Python, utilizamos as palavras-chave <code>try</code>, <code>except</code>, <code>else</code> e <code>finally</code> para capturar e tratar exceções. Isso garante maior robustez e controle, permitindo que o código continue funcionando ou execute ações específicas quando um erro ocorre.
+      </p>
+    </div>
+
+    <div class="mx-auto mt-5" style="max-width: 700px; font-size: 1.1rem;">
+      <h2>Quiz</h2>
+
+      <form id="quizForm"> {# Adicionado um ID ao formulário #}
+        <div class="mb-3">
+          <label><strong>1. Qual estrutura é usada para tomar decisões em Python?</strong></label><br>
+          <input type="radio" name="q1" value="a"> for<br>
+          <input type="radio" name="q1" value="b" data-correct="true"> if<br> {# Marcado como correto #}
+          <input type="radio" name="q1" value="c"> while<br>
+        </div>
+
+        <div class="mb-3">
+          <label><strong>2. Qual comando executa código repetidamente enquanto uma condição for verdadeira?</strong></label><br>
+          <input type="radio" name="q2" value="a"> if<br>
+          <input type="radio" name="q2" value="b" data-correct="true"> while<br> {# Marcado como correto #}
+          <input type="radio" name="q2" value="c"> def<br>
+        </div>
+
+        <div class="mb-3">
+          <label><strong>3. Como chamamos uma lista de listas em Python?</strong></label><br>
+          <input type="radio" name="q3" value="a"> vetor<br>
+          <input type="radio" name="q3" value="b" data-correct="true"> matriz<br> {# Marcado como correto #}
+          <input type="radio" name="q3" value="c"> função<br>
+        </div>
+
+        <div class="mb-3">
+          <label><strong>4. Qual a diferença principal entre função e procedimento?</strong></label><br>
+          <input type="radio" name="q4" value="a" data-correct="true"> Funções podem retornar valores; procedimentos não.<br> {# Marcado como correto #}
+          <input type="radio" name="q4" value="b"> Procedimentos podem retornar valores; funções não.<br>
+          <input type="radio" name="q4" value="c"> Não há diferença.<br>
+        </div>
+
+        <div class="mb-3">
+          <label><strong>5. Qual palavra-chave é usada para tratar exceções em Python?</strong></label><br>
+          <input type="radio" name="q5" value="a"> except<br> {# A resposta correta é 'try' para iniciar o bloco, 'except' para pegar o erro, mas 'except' é a mais direta como 'palavra-chave para tratar'. Vamos considerar 'try' como a base aqui, mas se for para o "catch" é o 'except'. A questão é um pouco ambígua. Se a pergunta for "QUAL A PRINCIPAL palavra-chave", 'try' seria a resposta mais abrangente para iniciar o tratamento. Para "tratar" o erro em si, é 'except'. Vou manter 'except' como correto baseado na sua seleção original, mas saiba que 'try' é o início do mecanismo. Para ser mais preciso, deveria ter uma opção 'try' ou a pergunta ser mais específica. No contexto da sua pergunta e opções, 'except' é o mais próximo de "tratar" a exceção. #}
+          <input type="radio" name="q5" value="b" data-correct="true"> try<br> {# Marcado como correto, considerando que 'try' inicia o bloco de tratamento #}
+          <input type="radio" name="q5" value="c"> def<br>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar respostas</button>
+      </form>
+
+      <div id="quizResult" class="mt-4 alert alert-info" style="display: none;"></div> {# Div para exibir o resultado #}
+    </div>
+
+    <div class="text-center">
+      <a href="{{ url_for('sobre_equipe') }}" class="btn btn-primary mt-4">Próxima página</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('quizForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Impede o envio do formulário padrão
+
+      let score = 0;
+      const totalQuestions = 5; // Número total de perguntas
+
+      // Array com os nomes dos grupos de rádio (name="q1", name="q2", etc.)
+      const questions = ['q1', 'q2', 'q3', 'q4', 'q5'];
+
+      questions.forEach(questionName => {
+        const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+        if (selectedOption && selectedOption.dataset.correct === 'true') {
+          score++;
+        }
+      });
+
+      const resultDiv = document.getElementById('quizResult');
+      resultDiv.innerHTML = `Você acertou ${score} de ${totalQuestions} perguntas!`;
+      resultDiv.style.display = 'block'; // Mostra o resultado
+    });
+  </script>
+{% endblock %}

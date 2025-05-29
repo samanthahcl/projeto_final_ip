@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interação com Gemini</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+            color: #343a40;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        textarea {
+            width: calc(100% - 22px); /* Ajusta para padding e borda */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical; /* Permite redimensionar verticalmente */
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            display: block; /* Ocupa a largura total */
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #response {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #e2f0ff;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+            white-space: pre-wrap; /* Preserva quebras de linha e espaços */
+            word-wrap: break-word; /* Quebra palavras longas */
+            min-height: 50px; /* Garante um tamanho mínimo */
+            font-size: 16px;
+            color: #333;
+        }
+        .loading {
+            display: none; /* Escondido por padrão */
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+            color: #6c757d;
+        }
+        .back-link {
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Converse com o Gemini</h1>
+        <textarea id="promptInput" rows="8" placeholder="Faça uma pergunta, peça um resumo, gere ideias..."></textarea>
+        <button onclick="sendPrompt()">Gerar Resposta</button>
+        <p class="loading" id="loadingMessage">Gerando resposta... aguarde.</p>
+        <div id="response"></div>
+        <a href="/" class="back-link">Voltar para a Página Inicial</a>
+    </div>
+
+    <script>
+        async function sendPrompt() {
+            const prompt = document.getElementById('promptInput').value;
+            const responseDiv = document.getElementById('response');
+            const loadingMessage = document.getElementById('loadingMessage');
+
+            // Validação simples do prompt
+            if (!prompt.trim()) {
+                responseDiv.innerHTML = "<span style='color: red;'>Por favor, digite algo para o Gemini.</span>";
+                return;
+            }
+
+            responseDiv.innerHTML = ''; // Limpa a resposta anterior
+            loadingMessage.style.display = 'block'; // Mostra mensagem de carregamento
+
+            try {
+                // Envia o prompt para a rota Flask que interage com o Gemini
+                const rawResponse = await fetch('/gerar_resposta_gemini', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                const data = await rawResponse.json(); // Converte a resposta para JSON
+
+                if (rawResponse.ok) { // Verifica se a resposta HTTP foi bem-sucedida (status 200)
+                    responseDiv.innerHTML = data.generated_text;
+                } else {
+                    // Exibe a mensagem de erro retornada pelo Flask
+                    responseDiv.innerHTML = `<span style='color: red;'>Erro: ${data.error || 'Erro desconhecido ao processar sua solicitação.'}</span>`;
+                }
+            } catch (error) {
+                // Captura erros de rede ou outros problemas durante a requisição
+                console.error("Erro na requisição Fetch:", error);
+                responseDiv.innerHTML = `<span style='color: red;'>Ocorreu um erro ao conectar com o servidor: ${error.message}</span>`;
+            } finally {
+                loadingMessage.style.display = 'none'; // Esconde mensagem de carregamento
+            }
+        }
+    </script>
+</body>
+</html>

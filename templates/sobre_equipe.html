@@ -1,12 +1,57 @@
 {% extends "modelo.html" %}
+
 {% block conteudo %}
-<div class="card" style="width: 18rem;">
-  <img src="{{ url_for('static', filename='kirby.jpg') }}" class="card-img-top" alt="kirby">
-  <div class="card-body">
-    <h5 class="card-title">Samantha</h5>
-    <p class="card-text">Aluna de sistemas para internet.</p>
-    <a href="#" class="btn btn-primary">LinkedIn</a>
-    <a href="#" class="btn btn-primary">GitHub</a>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div class="card h-100 text-center">
+        <img src="{{ url_for('static', filename='kirby.jpg') }}" class="card-img-top mx-auto mt-3 rounded-circle" alt="kirby" style="width: 150px; height: 150px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">Samantha</h5>
+          <p class="card-text">Aluna de Sistemas para Internet.</p>
+          <a href="https://br.linkedin.com/in/samanthahcl" class="btn btn-primary btn-sm mx-1">LinkedIn</a>
+          <a href="https://github.com/samanthahcl" class="btn btn-secondary btn-sm mx-1">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div class="card h-100 text-center">
+        <img src="{{ url_for('static', filename='marcelo.jpg') }}" class="card-img-top mx-auto mt-3 rounded-circle" alt="Marcelo" style="width: 150px; height: 150px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">Marcelo Pereira</h5>
+          <p class="card-text">Aluno de Sistemas para Internet.</p>
+          <a href="#" class="btn btn-primary btn-sm mx-1">LinkedIn</a>
+          <a href="#" class="btn btn-secondary btn-sm mx-1">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div class="card h-100 text-center">
+        <img src="{{ url_for('static', filename='carlo.jpg') }}" class="card-img-top mx-auto mt-3 rounded-circle" alt="Carlo" style="width: 150px; height: 150px; object-fit: cover;">
+        <div class="card-body">
+          <h5ref="#" clas class="card-title">Carlo H. Aires</h5>
+          <p class="card-text">Aluno de Sistemas para Internet.</p>
+          <a href="#" class="btn btn-primary btn-sm mx-1">LinkedIn</a>
+          <a href="#" class="btn btn-secondary btn-sm mx-1">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div class="card h-100 text-center">
+        <img src="{{ url_for('static', filename='giovanni.jpg') }}" class="card-img-top mx-auto mt-3 rounded-circle" alt="Giovanni" style="width: 150px; height: 150px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">Giovanni Monteiro</h5>
+          <p class="card-text">Aluno de Sistemas para Internet.</p>
+          <a hs="btn btn-primary btn-sm mx-1">LinkedIn</a>
+          <a href="#" class="btn btn-secondary btn-sm mx-1">GitHub</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 {% endblock %}
