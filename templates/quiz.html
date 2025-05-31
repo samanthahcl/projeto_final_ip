@@ -1,0 +1,300 @@
+{# C:/Users/carli/Documents/P1/Projeto IP/templates/quiz.html #}
+{% extends "modelo.html" %}
+
+{% block titulo %}Quiz Interativo - PyCaderno{% endblock %}
+
+{% block conteudo %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
+
+      <div class="mx-auto" style="font-size: 1.1rem;">
+        <h2 class="text-center mb-4">Quiz Interativo PyCaderno</h2>
+
+        <form id="quizForm">
+          {# Pergunta 1 #}
+          <div class="mb-3 p-3 border rounded shadow-sm">
+            <label class="form-label"><strong>1. Qual estrutura é usada para tomar decisões em Python?</strong></label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q1" id="q1a" value="a">
+              <label class="form-check-label" for="q1a">for</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q1" id="q1b" value="b" data-correct="true">
+              <label class="form-check-label" for="q1b">if</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q1" id="q1c" value="c">
+              <label class="form-check-label" for="q1c">while</label>
+            </div>
+          </div>
+
+          {# Pergunta 2 #}
+          <div class="mb-3 p-3 border rounded shadow-sm">
+            <label class="form-label"><strong>2. Qual comando executa código repetidamente enquanto uma condição for verdadeira?</strong></label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q2" id="q2a" value="a">
+              <label class="form-check-label" for="q2a">if</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q2" id="q2b" value="b" data-correct="true">
+              <label class="form-check-label" for="q2b">while</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q2" id="q2c" value="c">
+              <label class="form-check-label" for="q2c">def</label>
+            </div>
+          </div>
+
+          {# Pergunta 3 #}
+          <div class="mb-3 p-3 border rounded shadow-sm">
+            <label class="form-label"><strong>3. Como chamamos uma lista de listas em Python?</strong></label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q3" id="q3a" value="a">
+              <label class="form-check-label" for="q3a">vetor</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q3" id="q3b" value="b" data-correct="true">
+              <label class="form-check-label" for="q3b">matriz</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q3" id="q3c" value="c">
+              <label class="form-check-label" for="q3c">função</label>
+            </div>
+          </div>
+
+          {# Pergunta 4 #}
+          <div class="mb-3 p-3 border rounded shadow-sm">
+            <label class="form-label"><strong>4. Qual a diferença principal entre função e procedimento?</strong></label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q4" id="q4a" value="a" data-correct="true">
+              <label class="form-check-label" for="q4a">Funções podem retornar valores; procedimentos não.</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q4" id="q4b" value="b">
+              <label class="form-check-label" for="q4b">Procedimentos podem retornar valores; funções não.</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q4" id="q4c" value="c">
+              <label class="form-check-label" for="q4c">Ná diferença.</label>
+            </div>
+          </div>
+
+          {# Pergunta 5 #}
+          <div class="mb-3 p-3 border rounded shadow-sm">
+            <label class="form-label"><strong>5. Qual palavra-chave é usada para tratar exceções em Python?</strong></label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q5" id="q5a" value="a">
+              <label class="form-check-label" for="q5a">except</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q5" id="q5b" value="b" data-correct="true">
+              <label class="form-check-label" for="q5b">try</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q5" id="q5c" value="c">
+              <label class="form-check-label" for="q5c">def</label>
+            </div>
+          </div>
+                      {# Pergunta 6 #}
+          <div class="mb-3 p-3 border rounded shadow-sm">
+            <label class="form-label"><strong>6. Qual é o operador usado para exponenciação em Python?</strong></label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q6" id="q6a" value="a">
+              <label class="form-check-label" for="q6a">^</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q6" id="q6b" value="b" data-correct="true">
+              <label class="form-check-label" for="q6b">**</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q6" id="q6c" value="c">
+              <label class="form-check-label" for="q6c">%</label>
+            </div>
+          </div>
+
+          {# Pergunta 7 #}
+          <div class="mb-3 p-3 border rounded shadow-sm">
+            <label class="form-label"><strong>7. Qual método é usado para adicionar um item ao final de uma lista em Python?</strong></label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q7" id="q7a" value="a" data-correct="true">
+              <label class="form-check-label" for="q7a">append()</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q7" id="q7b" value="b">
+              <label class="form-check-label" for="q7b">insert()</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q7" id="q7c" value="c">
+              <label class="form-check-label" for="q7c">add()</label>
+            </div>
+          </div>
+
+          {# Pergunta 8 #}
+          <div class="mb-3 p-3 border rounded shadow-sm">
+            <label class="form-label"><strong>8. Em Python, como você inicia um comentário de uma linha?</strong></label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q8" id="q8a" value="a">
+              <label class="form-check-label" for="q8a">//</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q8" id="q8b" value="b">
+              <label class="form-check-label" for="q8b">/* */</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q8" id="q8c" value="c" data-correct="true">
+              <label class="form-check-label" for="q8c">#</label>
+            </div>
+          </div>
+
+          {# Pergunta 9 #}
+          <div class="mb-3 p-3 border rounded shadow-sm">
+            <label class="form-label"><strong>9. Qual das seguintes estruturas de dados é imutável em Python?</strong></label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q9" id="q9a" value="a">
+              <label class="form-check-label" for="q9a">Lista (list)</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q9" id="q9b" value="b" data-correct="true">
+              <label class="form-check-label" for="q9b">Tupla (tuple)</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q9" id="q9c" value="c">
+              <label class="form-check-label" for="q9c">Dicionário (dict)</label>
+            </div>
+          </div>
+
+          {# Pergunta 10 #}
+          <div class="mb-3 p-3 border rounded shadow-sm">
+            <label class="form-label"><strong>10. Qual função é usada para obter o comprimento (número de itens) de uma lista ou string em Python?</strong></label><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q10" id="q10a" value="a" data-correct="true">
+              <label class="form-check-label" for="q10a">len()</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q10" id="q10b" value="b">
+              <label class="form-check-label" for="q10b">size()</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q10" id="q10c" value="c">
+              <label class="form-check-label" for="q10c">count()</label>
+            </div>
+          </div>
+                    <div class="text-center"> {# ADICIONADO ESTA DIV #}
+            <button type="submit" class="btn btn-primary mt-3">Enviar respostas</button>
+          </div>
+        </form>
+
+        <div id="quizResult" class="mt-4 alert" style="display: none;"></div> {# Div para exibir o resultado, removi alert-info por enquanto #}
+      {# NOVO BOTÃO "TENTAR NOVAMENTE" #}
+        <div id="tryAgainContainer" class="mt-3 text-center" style="display: none;">
+          <button id="tryAgainButton" class="btn btn-primary">Tentar novamente</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const quizForm = document.getElementById('quizForm');
+    const quizResultDiv = document.getElementById('quizResult');
+    const totalQuestions = 10;
+    const tryAgainContainer = document.getElementById('tryAgainContainer'); // Pega o container do botão
+    const tryAgainButton = document.getElementById('tryAgainButton');     // Pega o botão
+
+    if (quizForm) {
+      quizForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        let allAnswered = true;
+        const unansweredQuestions = [];
+
+        for (let i = 1; i <= totalQuestions; i++) {
+          const questionName = 'q' + i;
+          const selectedOptionInput = quizForm.querySelector('input[name="' + questionName + '"]:checked');
+          if (!selectedOptionInput) {
+            allAnswered = false;
+            const questionLabel = quizForm.querySelector('input[name="' + questionName + '"]').closest('.mb-3').querySelector('label.form-label strong').textContent;
+            unansweredQuestions.push(questionLabel.split('.')[0]);
+          }
+        }
+
+        if (!allAnswered) {
+          quizResultDiv.innerHTML = '<p class="text-danger"><strong>Por favor, responda todas as questões antes de enviar.</strong></p>';
+          if (unansweredQuestions.length > 0) {
+             quizResultDiv.innerHTML += '<p class="text-danger">Questões pendentes: ' + unansweredQuestions.join(', ') + '</p>';
+          }
+          quizResultDiv.className = 'mt-4 alert alert-danger';
+          quizResultDiv.style.display = 'block';
+          tryAgainContainer.style.display = 'none'; // Esconde o botão "Tentar Novamente" se houver erro de validação
+          return;
+        }
+
+        let score = 0;
+        const incorrectAnswersDetails = [];
+
+        for (let i = 1; i <= totalQuestions; i++) {
+          const questionName = 'q' + i;
+          const selectedOptionInput = quizForm.querySelector('input[name="' + questionName + '"]:checked');
+          const questionElement = selectedOptionInput.closest('.mb-3');
+          const questionTextHTML = questionElement.querySelector('label.form-label').innerHTML;
+          const correctOptionInput = questionElement.querySelector('input[data-correct="true"]');
+          let correctAnswerText = "Não definida";
+          if (correctOptionInput && correctOptionInput.nextElementSibling) {
+            correctAnswerText = correctOptionInput.nextElementSibling.textContent;
+          }
+          const userAnswerText = selectedOptionInput.nextElementSibling ? selectedOptionInput.nextElementSibling.textContent : "Opção inválida";
+
+          if (selectedOptionInput.dataset.correct === "true") {
+            score++;
+          } else {
+            incorrectAnswersDetails.push({
+              questionHTML: questionTextHTML,
+              userAnswer: userAnswerText,
+              correctAnswer: correctAnswerText
+            });
+          }
+        }
+
+        let resultHTML = '<p>Você acertou <strong>' + score + '</strong> de <strong>' + totalQuestions + '</strong> perguntas!</p>';
+
+        if (incorrectAnswersDetails.length > 0) {
+          resultHTML += '<h4 class="mt-4">Revisão das suas respostas:</h4><ul class="list-group list-group-flush">';
+          incorrectAnswersDetails.forEach(item => {
+            resultHTML += `<li class="list-group-item">
+                            <p class="mb-1">${item.questionHTML}</p>
+                            <p class="mb-1"><em>Sua resposta:</em> <span class="text-danger">${item.userAnswer}</span></p>
+                            <p class="mb-0"><em>Resposta correta:</em> <strong class="text-success">${item.correctAnswer}</strong></p>
+                          </li>`;
+          });
+          resultHTML += '</ul>';
+        }
+
+        quizResultDiv.innerHTML = resultHTML;
+        quizResultDiv.style.display = 'block';
+        tryAgainContainer.style.display = 'block'; // Mostra o botão "Tentar Novamente"
+
+        quizResultDiv.className = 'mt-4 alert';
+        if (score === totalQuestions) {
+          quizResultDiv.classList.add('alert-success');
+        } else if (score >= Math.ceil(totalQuestions * 0.7)) {
+          quizResultDiv.classList.add('alert-info');
+        } else if (score >= Math.ceil(totalQuestions * 0.4)) {
+          quizResultDiv.classList.add('alert-warning');
+        } else {
+          quizResultDiv.classList.add('alert-danger');
+        }
+      });
+    }
+
+      if (tryAgainButton) {
+      tryAgainButton.addEventListener('click', function() {
+        window.location.href = window.location.pathname + window.location.search;
+      });
+    }
+  });
+</script>
+
+{% endblock %}

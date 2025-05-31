@@ -33,50 +33,7 @@
       </p>
     </div>
 
-    <div class="mx-auto mt-5" style="max-width: 700px; font-size: 1.1rem;">
-      <h2>Quiz</h2>
 
-      <form id="quizForm"> {# Adicionado um ID ao formulário #}
-        <div class="mb-3">
-          <label><strong>1. Qual estrutura é usada para tomar decisões em Python?</strong></label><br>
-          <input type="radio" name="q1" value="a"> for<br>
-          <input type="radio" name="q1" value="b" data-correct="true"> if<br> {# Marcado como correto #}
-          <input type="radio" name="q1" value="c"> while<br>
-        </div>
-
-        <div class="mb-3">
-          <label><strong>2. Qual comando executa código repetidamente enquanto uma condição for verdadeira?</strong></label><br>
-          <input type="radio" name="q2" value="a"> if<br>
-          <input type="radio" name="q2" value="b" data-correct="true"> while<br> {# Marcado como correto #}
-          <input type="radio" name="q2" value="c"> def<br>
-        </div>
-
-        <div class="mb-3">
-          <label><strong>3. Como chamamos uma lista de listas em Python?</strong></label><br>
-          <input type="radio" name="q3" value="a"> vetor<br>
-          <input type="radio" name="q3" value="b" data-correct="true"> matriz<br> {# Marcado como correto #}
-          <input type="radio" name="q3" value="c"> função<br>
-        </div>
-
-        <div class="mb-3">
-          <label><strong>4. Qual a diferença principal entre função e procedimento?</strong></label><br>
-          <input type="radio" name="q4" value="a" data-correct="true"> Funções podem retornar valores; procedimentos não.<br> {# Marcado como correto #}
-          <input type="radio" name="q4" value="b"> Procedimentos podem retornar valores; funções não.<br>
-          <input type="radio" name="q4" value="c"> Não há diferença.<br>
-        </div>
-
-        <div class="mb-3">
-          <label><strong>5. Qual palavra-chave é usada para tratar exceções em Python?</strong></label><br>
-          <input type="radio" name="q5" value="a"> except<br> {# A resposta correta é 'try' para iniciar o bloco, 'except' para pegar o erro, mas 'except' é a mais direta como 'palavra-chave para tratar'. Vamos considerar 'try' como a base aqui, mas se for para o "catch" é o 'except'. A questão é um pouco ambígua. Se a pergunta for "QUAL A PRINCIPAL palavra-chave", 'try' seria a resposta mais abrangente para iniciar o tratamento. Para "tratar" o erro em si, é 'except'. Vou manter 'except' como correto baseado na sua seleção original, mas saiba que 'try' é o início do mecanismo. Para ser mais preciso, deveria ter uma opção 'try' ou a pergunta ser mais específica. No contexto da sua pergunta e opções, 'except' é o mais próximo de "tratar" a exceção. #}
-          <input type="radio" name="q5" value="b" data-correct="true"> try<br> {# Marcado como correto, considerando que 'try' inicia o bloco de tratamento #}
-          <input type="radio" name="q5" value="c"> def<br>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Enviar respostas</button>
-      </form>
-
-      <div id="quizResult" class="mt-4 alert alert-info" style="display: none;"></div> {# Div para exibir o resultado #}
-    </div>
 
     <div class="text-center">
       <a href="{{ url_for('sobre_equipe') }}" class="btn btn-primary mt-4">Próxima página</a>

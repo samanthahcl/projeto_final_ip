@@ -4,18 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{% block titulo %}PyCaderno{% endblock %}</title>
+
+  <!-- Adicionar Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: #E8F5E9;
-      color: #1B5E20;
+      background-color: #E8F5E9; /* Seu verde claro de fundo */
+      color: #1B5E20; /* Seu verde escuro para texto */
       margin: 0;
       padding: 0;
+      display: flex; /* Adicionado para o sticky footer */
+      flex-direction: column; /* Adicionado para o sticky footer */
+      min-height: 100vh; /* Adicionado para o sticky footer */
     }
 
     header {
-      background-color: #2E7D32;
+      background-color: #2E7D32; /* Seu verde para o header */
       color: white;
       padding: 15px 30px;
       display: flex;
@@ -30,10 +37,7 @@
       margin: 0;
     }
 
-    header h1 img {
-      width: 40px;
-      margin-right: 10px;
-    }
+    /* Removido header h1 img pois o SVG está inline */
 
     nav a {
       color: white;
@@ -44,77 +48,107 @@
     }
 
     nav a:hover {
-      color: #81C784;
+      color: #A5D6A7; /* Um verde mais claro para hover, harmonizando com sua paleta */
     }
 
     main {
       padding: 30px;
-      min-height: 70vh;
+      flex-grow: 1; /* Adicionado para o sticky footer */
     }
 
-    .btn-primary {
+    /* Estilos para .btn-primary, .container, .mt-5, .mb-4, .text-center
+       podem ser mantidos ou você pode optar por usar as classes do Bootstrap
+       diretamente se elas suprirem suas necessidades.
+       Por exemplo, Bootstrap já tem .btn-primary, .container, .mt-5, .mb-4, .text-center.
+       Se você mantiver seus estilos, eles podem sobrescrever ou complementar os do Bootstrap.
+    */
+
+    /* Exemplo de como você poderia customizar o botão primário do Bootstrap
+       se quisesse manter sua cor específica, mas usando a base do Bootstrap.
+       Isso é opcional. */
+    .btn-primary { /* Este é o seu estilo customizado */
       background-color: #4CAF50;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1.1rem;
-      border-radius: 5px;
+      border-color: #4CAF50; /* Adicionar border-color para consistência */
+      /* padding: 12px 24px;  Bootstrap já tem padding, ajuste se necessário */
+      /* font-size: 1.1rem; Bootstrap já tem font-size, ajuste se necessário */
+      /* border-radius: 5px; Bootstrap já tem border-radius, ajuste se necessário */
       color: white;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: background-color 0.3s;
+      /* cursor: pointer; Já vem com Bootstrap */
+      /* text-decoration: none; Já vem com Bootstrap */
+      /* display: inline-block; Já vem com Bootstrap */
+      transition: background-color 0.3s, border-color 0.3s; /* Adicionar transição para border-color */
     }
 
     .btn-primary:hover {
-      background-color: #81C784;
+      background-color: #388E3C; /* Um verde um pouco mais escuro para hover */
+      border-color: #388E3C;
     }
+        .btn-linkedin {
+      background-color: #0A66C2; /* Azul oficial do LinkedIn */
+      border-color: #0A66C2;
+      color: white; /* Mantém o texto branco para bom contraste */
+    }
+
+    .btn-linkedin:hover {
+      background-color: #004182; /* Um tom um pouco mais escuro para o hover */
+      border-color: #004182;
+      color: white;
+    }
+
 
     footer {
-      background-color: #2E7D32;
-      color: #c8e6c9;
+      background-color: #2E7D32; /* Seu verde para o footer */
+      color: #C8E6C9; /* Seu verde bem claro para texto do footer */
       text-align: center;
-      padding: 15px;
-      margin-top: 40px;
+      padding: 20px 15px; /* Aumentei um pouco o padding vertical */
+      /* margin-top: 40px; Removido pois o flex-grow em main cuida do posicionamento */
     }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
+    /* Seus estilos para .container, .mt-5, .mb-4, .text-center
+       podem ser mantidos. O Bootstrap também oferece essas classes,
+       então você pode decidir se quer usar as do Bootstrap ou as suas.
+       Se mantiver as suas, elas podem sobrescrever as do Bootstrap
+       se forem mais específicas ou carregadas depois.
+    */
+    .container { /* Seu estilo de container */
+      max-width: 960px; /* Bootstrap usa diferentes max-widths por breakpoint, este é um valor comum */
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 15px; /* Adicionar padding para não colar nas bordas em telas menores */
+      padding-right: 15px;
     }
 
-    .mt-5 {
-      margin-top: 3rem;
-    }
+    /* .mt-5, .mb-4, .text-center são classes utilitárias do Bootstrap.
+       Se você as definiu aqui, elas podem ter um comportamento ligeiramente
+       diferente ou igual. Geralmente é bom usar as do Bootstrap para consistência.
+       Ex: .mt-5 do Bootstrap adiciona margin-top: 3rem !important;
+    */
 
-    .mb-4 {
-      margin-bottom: 1.5rem;
-    }
 
-    .text-center {
-      text-align: center;
-    }
   </style>
 </head>
 <body>
   <header>
     <h1>
-      <!-- Se quiser, coloque o SVG da cobra na pasta static/img/python_snake.svg -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 64 64" fill="none">
-  <path d="M32 2C20 2 12 10 12 22V26H34C36 26 38 28 38 30V34C38 36 36 38 34 38H12V42C12 54 20 62 32 62C44 62 52 54 52 42V38H30C28 38 26 36 26 34V30C26 28 28 26 30 26H52V22C52 10 44 2 32 2Z" fill="#4CAF50"/>
-  <circle cx="22" cy="18" r="3" fill="white"/>
-</svg>
-
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 64 64" fill="none" style="margin-right: 10px;">
+        <path d="M32 2C20 2 12 10 12 22V26H34C36 26 38 28 38 30V34C38 36 36 38 34 38H12V42C12 54 20 62 32 62C44 62 52 54 52 42V38H30C28 38 26 36 26 34V30C26 28 28 26 30 26H52V22C52 10 44 2 32 2Z" fill="#81C784"/> {/* Cor do ícone ajustada para um verde mais claro do header */}
+        <circle cx="22" cy="18" r="3" fill="white"/>
+      </svg>
       PyCaderno
     </h1>
     <nav>
+          <nav>
       <a href="{{ url_for('ola') }}">Início</a>
       <a href="{{ url_for('sobre_equipe') }}">Equipe</a>
       <a href="{{ url_for('glossario') }}">Glossário</a>
-      <a href="{{ url_for('prompt_gemini') }}">Pergunte ao Gemini</a>
+      <a href="{{ url_for('quiz_page') }}">Quiz</a>
+      <a href="{{ url_for('prompt_gemini_page') }}">Pergunte ao Gemini</a>
+
+    </nav>
     </nav>
   </header>
 
-  <main>
+  <main class="container mt-4"> {# Adicionando classes Bootstrap para consistência #}
     {% block conteudo %}
     <!-- Conteúdo específico das páginas -->
     {% endblock %}
@@ -123,5 +157,9 @@
   <footer>
     © 2025 PyCaderno - Todos os direitos reservados
   </footer>
+
+  <!-- Opcional: Adicionar JavaScript do Bootstrap (necessário para alguns componentes como dropdowns, modals, etc.) -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+
 </body>
 </html>
