@@ -1,11 +1,10 @@
 from app import db
 
-class Produto(db.Model):
+class Termo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
-    preco = db.Column(db.Float, nullable=False)
+    termo = db.Column(db.String(255), nullable=False)
+    definicao = db.Column(db.Text, nullable=False)
 
-    def __repr__(self):
-        return f'<Produto {self.nome}>'
+
 
 

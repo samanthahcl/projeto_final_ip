@@ -83,14 +83,14 @@ def sobre_equipe():
 def glossario():
     glossario_de_termos = []
     try:
-        with open('bd_glossario.csv', 'r', newline='', encoding='utf-8') as arquivo:
+        with open('bd_glossario.db', 'r', newline='', encoding='utf-8') as arquivo:
             reader = csv.reader(arquivo, delimiter=';')
             for linha in reader:
                 glossario_de_termos.append(linha)
     except FileNotFoundError:
-        print("AVISO: Arquivo bd_glossario.csv não encontrado. O glossário estará vazio.")
+        print("AVISO: Arquivo bd_glossario.db não encontrado. O glossário estará vazio.")
     except Exception as e:
-        print(f"ERRO ao ler o arquivo bd_glossario.csv: {e}")
+        print(f"ERRO ao ler o arquivo bd_glossario.db: {e}")
     return render_template('glossario.html', glossario=glossario_de_termos)
 
 @app.route('/novo_termo')
@@ -103,7 +103,7 @@ def criar_termo():
         termo = request.form['termo']
         definicao = request.form['definicao']
 
-        with open('bd_glossario.csv', 'a', newline='', encoding='utf-8') as arquivo:
+        with open('bd_glossario.db', 'a', newline='', encoding='utf-8') as arquivo:
             writer = csv.writer(arquivo, delimiter=';')
             writer.writerow([termo, definicao])
         return redirect(url_for('glossario'))
@@ -167,27 +167,73 @@ def gerar_resposta_gemini_api():
 
 if __name__ == '__main__':
     # Certifique-se de que o debug=True seja usado apenas em desenvolvimento
-    app.run(debug=True)
 
-from flask import Flask
+    app.run(debug=True)
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
+import csv
+import google.generativeai as genai
 
 app = Flask(__name__)
+
+# Configuração do banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(app)
 
-# Importa os modelos para o Flask saber deles
-from models import Produto
+from models import Termo
+
+# --- Configuração do Gemini ---
+GEMINI_API_KEY_HARDCODED = "SUA_CHAVE_API_AQUI"
+model = None
+try:
+    if not GEMINI_API_KEY_HARDCODED or GEMINI_API_KEY_HARDCODED == "SUA_CHAVE_API_AQUI":
+        print("ALERTA: A chave da API do Gemini não foi definida ou está placeholder.")
+    else:
+        genai.configure(api_key=GEMINI_API_KEY_HARDCODED)
+        print("API Key configurada.")
+        available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+        if available_models:
+            model = genai.GenerativeModel(available_models[0])
+except Exception as e:
+    print(f"Erro na configuração do Gemini: {e}")
+    model = None
 
 @app.route('/')
-def home():
-    return "Flask com Banco de Dados SQLite está funcionando!"
+def index():
+    return render_template('index.html')
+
+@app.route('/glossario')
+def glossario():
+    glossario_de_termos = Termo.query.all()
+    return render_template('glossario.html', glossario=glossario_de_termos)
+
+@app.route('/novo_termo')
+def novo_termo():
+    return render_template('novo_termo.html')
+
+@app.route('/criar_termo', methods=['POST'])
+def criar_termo():
+    termo = request.form['termo']
+    definicao = request.form['definicao']
+    novo_termo = Termo(termo=termo, definicao=definicao)
+    db.session.add(novo_termo)
+    db.session.commit()
+    return redirect(url_for('glossario'))
+
+@app.route('/gerar_resposta_gemini', methods=['POST'])
+def gerar_resposta_gemini_api():
+    if not model:
+        return jsonify({"error": "Serviço Gemini não disponível."}), 503
+    dados_requisicao = request.get_json()
+    prompt_usuario = dados_requisicao.get('prompt', '').strip()
+    if not prompt_usuario:
+        return jsonify({"error": "Prompt vazio."}), 400
+    response = model.generate_content(prompt_usuario)
+    return jsonify({"generated_text": response.text})
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 
 
 
