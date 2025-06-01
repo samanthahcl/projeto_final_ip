@@ -13,7 +13,7 @@ app.secret_key = 'sua_chave_secreta_muito_segura_aqui'
 GLOSSARIO_FILE = 'bd_glossario.db'
 
 # --- Configuração da API do Gemini (seu código existente) ---
-GEMINI_API_KEY_HARDCODED = "AIzaSyD0fv4Dcc_MyK9-S0Uecop3A765A0FA27Q"  # Sua chave aqui
+GEMINI_API_KEY_HARDCODED = "AIzaSyDVpWWqSQxcr-EZy6C-stVtEE-3N3h4vzs"  # Sua chave aqui
 model = None
 try:
     if not GEMINI_API_KEY_HARDCODED or GEMINI_API_KEY_HARDCODED == "SUA_CHAVE_API_AQUI":
