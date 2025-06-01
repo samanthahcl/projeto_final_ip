@@ -86,7 +86,7 @@
         .btn-linkedin {
       background-color: #0A66C2; /* Azul oficial do LinkedIn */
       border-color: #0A66C2;
-      color: white; /* Mantém o texto branco para bom contraste */
+      color: white; /* Mantm o texto branco para bom contraste */
     }
 
     .btn-linkedin:hover {
@@ -123,7 +123,27 @@
        diferente ou igual. Geralmente é bom usar as do Bootstrap para consistência.
        Ex: .mt-5 do Bootstrap adiciona margin-top: 3rem !important;
     */
+    /* Estilos para larguras das colunas do glossário */
 
+    .coluna-glossario-numero {
+      width: 5%; /* Ou a largura desejada para a coluna Nº */
+      text-align: center;
+    }
+    .coluna-glossario-termo {
+      width: 20%; /* Ajuste conforme necessário */
+    }
+    .coluna-glossario-definicao {
+      /* Esta coluna pode pegar o espaço restante automaticamente,
+         ou você pode definir uma largura maior explicitamente.
+         Deixando sem width aqui, ela se expandirá. */
+    }
+    .coluna-glossario-acao {
+      width: 15%; /* Largura reduzida para a coluna de Ação */
+      /* Certifique-se de que esta largura ainda acomoda seus botões.
+         15% deve ser significativamente menor que a distribuição padrão.
+         Você pode usar um valor em pixels se preferir, ex: width: 160px; */
+      text-align: center; /* Opcional: para centralizar os botões na coluna */
+    }
 
   </style>
 </head>
@@ -141,14 +161,25 @@
       <a href="{{ url_for('ola') }}">Início</a>
             <a href="{{ url_for('quiz_page') }}">Quiz</a>
       <a href="{{ url_for('sobre_equipe') }}">Equipe</a>
-      <a href="{{ url_for('glossario') }}">Glossário</a>
+      <a href="{{ url_for('glossario_page') }}">Glossário</a>
       <a href="{{ url_for('prompt_gemini_page') }}">Pergunte ao Gemini</a>
 
     </nav>
     </nav>
   </header>
 
-  <main class="container mt-4"> {# Adicionando classes Bootstrap para consistência #}
+  <main class="container-fluid mt-4"> {# Adicionando classes Bootstrap para consistência #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     {% block conteudo %}
     <!-- Conteúdo específico das páginas -->
     {% endblock %}

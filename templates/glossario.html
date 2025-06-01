@@ -3,25 +3,71 @@
 <h1>Glossário</h1>
 
 <table class="table table-striped table-responsive table-bordered">
-<thead class="thead-default">
-<tr>
-<th scope="col">#</th>
-<th scope="col">Termo</th>
-<th scope="col">Definição</th>
-<th scope="col">Ação</th>
-</tr>
-</thead>
-<tbody>
-{% for termo in glossario %}
-<tr>
-<th scope="row">{{ loop.index }}</th>
-<td>{{ termo[0] }}</td>
-<td>{{ termo[1] }}</td>
-<td>
-Apagar
-</td>
-</tr>
-{% endfor %}
-</tbody>
+    <thead class="thead-default">
+        <tr>
+            <thead>
+                <tr>
+                    <th scope="col" class="coluna-glossario-numero">Nº</th>
+                    <th scope="col" class="coluna-glossario-termo">Termo</th>
+                    <th scope="col" class="coluna-glossario-definicao">Definição</th>
+                    <th scope="col" class="coluna-glossario-acao">Ação</th>
+                </tr>
+            </thead>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for termo_item in glossario %}
+        {# Cada termo_item é esperado como uma lista/tupla [termo, definicao] ou um objeto com atributos equivalentes #}
+        {# Se você tiver um ID único para cada termo (ex: termo_item.id ou termo_item[2]), é altamente recomendável usá-lo #}
+        <tr>
+            <th scope="row">{{ loop.index }}</th>
+
+            {# Campos de input para Termo e Definição, associados ao formulário de atualização abaixo #}
+            <td>
+                <input type="text" name="termo" value="{{ termo_item[0] }}" class="form-control" form="updateForm{{ loop.index }}" required>
+            </td>
+            <td>
+                <textarea name="definicao" class="form-control" form="updateForm{{ loop.index }}" rows="3" required>{{ termo_item[1] }}</textarea>
+            </td>
+
+            {# Coluna de Ações com formulários para Salvar (Atualizar) e Apagar #}
+            <td>
+                {# Formulário para ATUALIZAR o termo #}
+                <form id="updateForm{{ loop.index }}" method="POST" action="{{ url_for('atualizar_termo_glossario') }}" style="display: inline-block;">
+                    {# Campo oculto para identificar o termo original que está sendo editado. #}
+                    {# IMPORTANTE: Se 'termo_item[0]' (o nome do termo) pode ser alterado, #}
+                    {# você precisa de um identificador estável. Se 'termo_item' tem um ID (ex: termo_item.id), use-o: #}
+                    {# <input type="hidden" name="id_do_termo" value="{{ termo_item.id }}"> #}
+                    {# Por enquanto, estou usando o nome original do termo como identificador. #}
+                    <input type="hidden" name="identificador_original_termo" value="{{ termo_item[0] }}">
+                    <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                </form>
+
+                {# Formulário para APAGAR o termo #}
+                <form method="POST" action="{{ url_for('apagar_termo_glossario') }}" style="display: inline-block; margin-left: 5px;">
+                    {# Campo oculto para identificar qual termo apagar. Novamente, use um ID estável se disponível. #}
+                    <input type="hidden" name="identificador_termo_apagar" value="{{ termo_item[0] }}">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja apagar este termo?');">Apagar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
+
+<hr>
+<h2>Adicionar Novo Termo</h2>
+<form method="POST" action="{{ url_for('adicionar_termo_glossario') }}" class="mt-3">
+    <div class="form-group mb-3">
+        <label for="novo_termo_texto" class="form-label">Termo:</label>
+        <input type="text" class="form-control" id="novo_termo_texto" name="termo" required>
+    </div>
+    <div class="form-group mb-3">
+        <label for="nova_definicao_texto" class="form-label">Definição:</label>
+        <textarea class="form-control" id="nova_definicao_texto" name="definicao" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Adicionar Termo</button>
+</form>
+
 {% endblock %}
