@@ -168,3 +168,29 @@ def gerar_resposta_gemini_api():
 if __name__ == '__main__':
     # Certifique-se de que o debug=True seja usado apenas em desenvolvimento
     app.run(debug=True)
+
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+# Importa os modelos para o Flask saber deles
+from models import Produto
+
+@app.route('/')
+def home():
+    return "Flask com Banco de Dados SQLite está funcionando!"
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+
+
+
+
