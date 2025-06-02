@@ -5,25 +5,22 @@ import google.generativeai as genai # Biblioteca do Gemini
 
 app = Flask(__name__)
 
-# É MUITO IMPORTANTE definir uma secret_key para usar flash messages
-# TROQUE 'sua_chave_secreta_muito_segura_aqui' por uma string aleatória e segura
 app.secret_key = 'sua_chave_secreta_muito_segura_aqui'
 
-# Nome do arquivo do glossário
 GLOSSARIO_FILE = 'bd_glossario.db'
 
-# --- Configuração da API do Gemini (seu código existente) ---
-GEMINI_API_KEY_HARDCODED = "AIzaSyDVpWWqSQxcr-EZy6C-stVtEE-3N3h4vzs"  # Sua chave aqui
+
+GEMINI_API_KEY_HARDCODED = "AIzaSyC4va-n3rrvAK5leTswcGHDYlt9gTgYT3g"  # Sua chave aqui
 model = None
 try:
     if not GEMINI_API_KEY_HARDCODED or GEMINI_API_KEY_HARDCODED == "SUA_CHAVE_API_AQUI":
         print("ALERTA: A chave da API do Gemini não foi definida ou ainda está com o valor placeholder.")
-        # ... (resto da sua configuração do Gemini) ...
+
     else:
         genai.configure(api_key=GEMINI_API_KEY_HARDCODED)
         print("INFO: API Key do Gemini (hardcoded) configurada.")
-        # ... (continuação da sua lógica de inicialização do modelo Gemini) ...
-        # Exemplo simplificado:
+
+
         available_models_for_generation = [m.name for m in genai.list_models() if
                                            'generateContent' in m.supported_generation_methods]
         if 'models/gemini-1.5-flash-latest' in available_models_for_generation:
@@ -40,10 +37,8 @@ except Exception as e:
     model = None
 
 
-# --- Fim da Configuração da API do Gemini ---
 
 
-# --- Funções Auxiliares para o Glossário (CSV) ---
 def ler_glossario_csv():
     """Lê todos os termos do arquivo CSV."""
     termos = []
@@ -72,7 +67,7 @@ def escrever_glossario_csv(termos):
         return False
 
 
-# --- Rotas da Aplicação (suas rotas existentes) ---
+
 @app.route('/')
 def ola():
     return render_template('index.html')
@@ -83,7 +78,7 @@ def sobre_equipe():
     return render_template('sobre_equipe.html')
 
 
-# --- ROTAS DO GLOSSÁRIO ---
+
 
 @app.route('/glossario')
 def glossario_page():  # Rota atualizada que você pediu
@@ -128,7 +123,7 @@ def atualizar_termo_glossario():
         termos_atuais = ler_glossario_csv()
         termo_encontrado_para_atualizar = False
 
-        # Verifica se o novo nome do termo (se alterado) já existe em outro item
+
         novo_termo_conflita = False
         if termo_atualizado_texto.lower() != identificador_original.lower():  # Se o nome do termo foi alterado
             for item_idx, item_val in enumerate(termos_atuais):
@@ -140,7 +135,7 @@ def atualizar_termo_glossario():
             flash(f"O termo '{termo_atualizado_texto}' já existe. Escolha outro nome.", "warning")
             return redirect(url_for('glossario_page'))
 
-        # Procura e atualiza o termo
+
         for i, item in enumerate(termos_atuais):
             if item[0] == identificador_original:  # Encontra pelo termo original
                 termos_atuais[i][0] = termo_atualizado_texto
@@ -182,7 +177,7 @@ def apagar_termo_glossario():
     return redirect(url_for('glossario_page'))
 
 
-# --- Suas outras rotas (prompt_gemini, quiz, etc.) ---
+
 @app.route('/prompt_gemini')
 def prompt_gemini_page():
     return render_template('prompt_gemini.html')
@@ -219,23 +214,6 @@ def gerar_resposta_gemini_api():
         return jsonify({"error": f"Ocorreu um erro: {str(e)}"}), 500
 
 
-# A rota /novo_termo e /criar_termo originais podem ser removidas se você estiver usando
-# o formulário de adição diretamente na página /glossario.
-# Se você ainda as usa para uma página separada de adição, pode mantê-las,
-# mas a lógica de adicionar ao CSV já está em /glossario/adicionar.
-# Exemplo:
-# @app.route('/novo_termo')
-# def novo_termo():
-#    return render_template('novo_termo.html')
-
-# @app.route('/criar_termo', methods=['POST'])
-# def criar_termo():
-#    # Esta lógica agora está em /glossario/adicionar
-#    # Se mantiver, redirecione ou adapte.
-#    novo_termo_texto = request.form.get('termo')
-#    nova_definicao_texto = request.form.get('definicao')
-#    # ... (lógica para adicionar, similar a /glossario/adicionar) ...
-#    return redirect(url_for('glossario_page'))
 
 
 if __name__ == '__main__':
@@ -247,14 +225,14 @@ import google.generativeai as genai
 
 app = Flask(__name__)
 
-# Configuração do banco de dados
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 from models import Termo
 
-# --- Configuração do Gemini ---
+
 GEMINI_API_KEY_HARDCODED = "SUA_CHAVE_API_AQUI"
 model = None
 try:
